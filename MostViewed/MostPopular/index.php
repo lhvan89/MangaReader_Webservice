@@ -1,5 +1,5 @@
-<?php include 'header.php'; ?>
-<?php include 'base_response.php'; ?>
+<?php include '../../header.php'; ?>
+<?php include '../../base_response.php'; ?>
 
 <?php
 
@@ -24,7 +24,7 @@ if ($result->num_rows > 0) {
     $item->id       = $row["id"];
     $item->title    = $row["title"];
     $item->status   = $row["status"] == "Ongoing" ? $row["latest_chapter"] : $row["status"];
-    $item->thumnail = $row["url_image"];
+    $item->thumbnail = $row["url_image"];
 
     $data[] = $item;
     // if $item
@@ -34,5 +34,6 @@ if ($result->num_rows > 0) {
 } else {
   echo "0 results";
 }
-$conn->close();
 ?>
+
+<?php include '../../footer.php'; ?>
