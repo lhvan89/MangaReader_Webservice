@@ -1,15 +1,7 @@
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "MangaReader";
+<?php include 'header.php'; ?>
+<?php include 'base_response.php'; ?>
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
+<?php
 
 $sql = "SELECT * From manga";
 $result = $conn->query($sql);
@@ -18,8 +10,9 @@ if ($result->num_rows > 0) {
   // output data of each row
   while($row = $result->fetch_assoc()) {
     // echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-    echo $row["title"]; 
+    // echo $row["title"]; 
   }
+  echo json_encode($response);
 } else {
   echo "0 results";
 }
