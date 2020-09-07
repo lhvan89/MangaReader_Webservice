@@ -24,7 +24,7 @@ if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
     $item = new stdClass();
 
-    $item->id       = $row["id"];
+    $item->id       = (int)$row["id"];
     $item->title    = $row["title"];
     $item->status   = $row["status"] == "Ongoing" ? $row["latest_chapter"] : $row["status"];
     $item->thumbnail = $row["url_image"];

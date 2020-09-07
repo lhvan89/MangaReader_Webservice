@@ -3,16 +3,31 @@
 
 <?php
 
+class Manga {
+  public $id;
+  public $title;
+}
+
+// Get List Author
 $sql = <<<EOT
-SELECT m.id, m.title, m.url_image, m.status, c.title AS latest_chapter, j.views
-FROM chapter c INNER JOIN(
-    SELECT MAX(id) id, manga_id, SUM(view) views
-    FROM chapter
-    GROUP BY manga_id) j ON c.id = j.id AND c.manga_id = j.manga_id 
-    
-    INNER JOIN manga m
-    ON m.id = c.manga_id
-    ORDER BY j.views  DESC
+SELECT a.name
+FROM author a, manga_author ma
+WHERE ma.author_id = a.id AND ma.manga_id = 1
+EOT;
+$result = $conn->query($sql);
+$listAuthor = (array) null;
+if ($result->num_rows > 0) {
+  // output data of each row
+  while($row = $result->fetch_assoc()) {
+    $listAuthor[] = $row["name"];
+  }
+  
+}
+
+$sql = <<<EOT
+SELECT *
+FROM manga m
+WHERE m.status = "Completed"
 EOT;
 
 $result = $conn->query($sql);
@@ -28,6 +43,7 @@ if ($result->num_rows > 0) {
     $item->title    = $row["title"];
     $item->status   = $row["status"] == "Ongoing" ? $row["latest_chapter"] : $row["status"];
     $item->thumbnail = $row["url_image"];
+    
 
     $data[] = $item;
   }
