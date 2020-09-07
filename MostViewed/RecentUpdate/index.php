@@ -4,15 +4,15 @@
 <?php
 
 $sql = <<<EOT
-SELECT m.id, m.title, m.url_image, m.status, c.title AS latest_chapter, j.views
+SELECT m.id, m.title, m.url_image, m.status, c.title AS latest_chapter, c.update_date
 FROM chapter c INNER JOIN(
-    SELECT MAX(id) id, manga_id, SUM(view) views
+    SELECT MAX(id) id, manga_id
     FROM chapter
     GROUP BY manga_id) j ON c.id = j.id AND c.manga_id = j.manga_id 
     
     INNER JOIN manga m
-    ON m.id = c.manga_id
-    ORDER BY j.views  DESC
+    ON m.id = c.manga_id  
+ORDER BY c.update_date DESC
 EOT;
 
 $result = $conn->query($sql);
