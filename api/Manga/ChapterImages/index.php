@@ -20,9 +20,9 @@ if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
     $item = new stdClass();
 
-    $item->id         = (int)$row["id"];
-    $item->chapterId  = $row["chapter_id"];
-    $item->urlImage   = $row["url_image"];
+    $item->Id         = (int)$row["id"];
+    $item->ChapterId  = $row["chapter_id"];
+    $item->UrlImage   = $row["url_image"];
 
     $data[] = $item;
   }

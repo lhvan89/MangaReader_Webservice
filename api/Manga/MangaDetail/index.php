@@ -4,8 +4,8 @@
 <?php
 
 class Manga {
-  public $id;
-  public $title;
+  public $Id;
+  public $Title;
 }
 
 $id = $_GET['id'];
@@ -52,10 +52,10 @@ $listChapter = (array)null;
 if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
     $item = new stdClass();
-    $item->id = (int)$row["id"];
-    $item->title = $row["title"];
-    $item->view = $row["view"];
-    $item->update_date = $row["update_date"];
+    $item->Id = (int)$row["id"];
+    $item->Title = $row["title"];
+    $item->View = $row["view"];
+    $item->Update_date = $row["update_date"];
     $listChapter[] = $item;
   }
 }
@@ -76,14 +76,14 @@ if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
     $item = new stdClass();
 
-    $item->id         = (int)$row["id"];
-    $item->title      = $row["title"];
-    $item->status     = $row["status"];
-    $item->thumbnail  = $row["url_image"];
-    $item->authors    = implode(", ",$listAuthor);
-    $item->generes    = implode(" - ",$listGenere);
-    $item->description = $row["description"];
-    $item->chapters   = $listChapter;
+    $item->Id         = (int)$row["id"];
+    $item->Title      = $row["title"];
+    $item->Status     = $row["status"];
+    $item->Thumbnail  = $row["url_image"];
+    $item->Authors    = implode(", ",$listAuthor);
+    $item->Generes    = implode(" - ",$listGenere);
+    $item->Description = $row["description"];
+    $item->Chapters   = $listChapter;
     $data = $item;
 
   }

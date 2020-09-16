@@ -11,7 +11,7 @@ FROM chapter c INNER JOIN(
     GROUP BY manga_id) j ON c.id = j.id AND c.manga_id = j.manga_id 
     
     INNER JOIN manga m
-    ON m.id = c.manga_id  
+    ON m.id = c.manga_id
 ORDER BY c.update_date DESC
 EOT;
 
@@ -24,10 +24,11 @@ if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
     $item = new stdClass();
 
-    $item->id       = (int)$row["id"];
-    $item->title    = $row["title"];
-    $item->status   = $row["status"] == "Ongoing" ? $row["latest_chapter"] : $row["status"];
-    $item->thumbnail = $row["url_image"];
+    $item->Id             = (int)$row["id"];
+    $item->Title          = $row["title"];
+    $item->LatestChapter  = $row["latest_chapter"];
+    $item->Status         = $row["status"];
+    $item->Thumbnail      = $row["url_image"];
 
     $data[] = $item;
   }
